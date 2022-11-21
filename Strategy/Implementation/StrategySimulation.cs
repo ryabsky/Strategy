@@ -7,15 +7,20 @@ namespace Strategy.Implementation
     {
         private readonly uint timeStepsCount;
         private readonly IContinuousDistribution distribution;
+        private readonly double startAmount;
 
-        public StrategySimulation(uint timeStepsCount, IContinuousDistribution distribution)
+        public StrategySimulation(double startAmount, uint timeStepsCount, IContinuousDistribution distribution)
         {
             this.timeStepsCount = timeStepsCount;
             this.distribution = distribution;
+            this.startAmount = startAmount;
         }
 
         public double GetOverallReturn()
         {
+            // Based on the formula, OverallReturn does not depend on the startAmount
+            // But it got included here to show that it is possible to use it.
+
             double pow = 0.0;
 
             for (int i = 0; i < timeStepsCount; i++)

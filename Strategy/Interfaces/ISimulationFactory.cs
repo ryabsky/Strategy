@@ -2,6 +2,6 @@
 {
     public interface ISimulationFactory
     {
-        ISimulation CreateSimulation(uint timeStepsCount);
+        ISimulation CreateSimulation(double startAmount, uint timeStepsCount);
     }
 }

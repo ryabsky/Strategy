@@ -13,9 +13,9 @@ namespace Strategy.Test.Mocks
             this.distribution = distribution;
         }
 
-        public ISimulation CreateSimulation(uint timeStepsCount)
+        public ISimulation CreateSimulation(double startAmount, uint timeStepsCount)
         {
-            return new StrategySimulation(timeStepsCount, distribution);
+            return new StrategySimulation(startAmount, timeStepsCount, distribution);
         }
     }
 }

@@ -16,7 +16,7 @@ public class Tests
     public Tests()
     {
         mockSimulationFactory = new Mock<SimulationFactory>(MockBehavior.Strict, 0.0, 1.0).As<ISimulationFactory>();
-        mockSimulationFactory.Setup(m => m.CreateSimulation(It.IsAny<uint>()))
+        mockSimulationFactory.Setup(m => m.CreateSimulation(It.IsAny<double>(), It.IsAny<uint>()))
             .Returns(() => {
                 var distribution = new MockDistribution(numbers);
                 var mockSimulation = new MockSimulation(distribution);
@@ -24,7 +24,7 @@ public class Tests
             });
 
         mockSimulationFactoryVeryLong = new Mock<SimulationFactory>(MockBehavior.Strict, 0.0, 1.0).As<ISimulationFactory>();
-        mockSimulationFactoryVeryLong.Setup(m => m.CreateSimulation(It.IsAny<uint>()))
+        mockSimulationFactoryVeryLong.Setup(m => m.CreateSimulation(It.IsAny<double>(), It.IsAny<uint>()))
             .Returns(() => {
                 var distribution = new MockDistribution(numbers);
                 var mockSimulation = new MockVeryLongSimulation(distribution);
@@ -41,7 +41,7 @@ public class Tests
     public void Test_Experiment_ScenariosCount()
     {
         uint scenariosCount = 20;
-        var experiment = new Experiment(scenariosCount, timeStepsCount: 30);
+        var experiment = new Experiment(startAmount: 100.0, scenariosCount, timeStepsCount: 30);
         Assert.That(experiment.ScenariosCount, Is.EqualTo(scenariosCount));
         Assert.That(experiment.Status, Is.EqualTo(ExperimentStatus.NotStarted));
     }
@@ -49,7 +49,7 @@ public class Tests
     [Test]
     public async Task Test_Experiment_Run()
     {
-        var experiment = new Experiment(scenariosCount: 2, timeStepsCount: 5, mockSimulationFactory.Object);
+        var experiment = new Experiment(startAmount: 100.0, scenariosCount: 2, timeStepsCount: 5, mockSimulationFactory.Object);
         await experiment.RunAsync();
 
         Assert.That(experiment.Status, Is.EqualTo(ExperimentStatus.Completed));
@@ -60,7 +60,7 @@ public class Tests
     {
         uint scenariosCount = 2;
 
-        var experiment = new Experiment(scenariosCount, timeStepsCount: 5, mockSimulationFactory.Object);
+        var experiment = new Experiment(startAmount: 100.0, scenariosCount, timeStepsCount: 5, mockSimulationFactory.Object);
         await experiment.RunAsync();
         var result = experiment.GetExperimentResult();
 
@@ -72,7 +72,7 @@ public class Tests
     [Test]
     public void Test_Experiment_GetExperimentResultLong()
     {
-        var veryLongExperiment = new Experiment(scenariosCount: 2, timeStepsCount: 5, mockSimulationFactoryVeryLong.Object);
+        var veryLongExperiment = new Experiment(startAmount: 100.0, scenariosCount: 2, timeStepsCount: 5, mockSimulationFactoryVeryLong.Object);
         veryLongExperiment.RunAsync();
 
         Thread.Sleep(10);
@@ -85,7 +85,7 @@ public class Tests
     public void Test_Simulation()
     {
         uint timeStepsCount = 3;
-        var simulation = new StrategySimulation(timeStepsCount, new MockDistribution(numbers));
+        var simulation = new StrategySimulation(startAmount: 100.0, timeStepsCount, new MockDistribution(numbers));
 
         var result = simulation.GetOverallReturn();
         Assert.That(result, Is.EqualTo(0.0).Within(tol));

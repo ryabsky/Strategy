@@ -14,9 +14,9 @@ namespace Strategy.Implementation
             this.std = std;
         }
 
-        public ISimulation CreateSimulation(uint timeStepsCount)
+        public ISimulation CreateSimulation(double startAmount, uint timeStepsCount)
         {
-            return new StrategySimulation(timeStepsCount, new Normal(mean, std));
+            return new StrategySimulation(startAmount, timeStepsCount, new Normal(mean, std));
         }
     }
 }

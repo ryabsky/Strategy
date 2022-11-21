@@ -11,20 +11,20 @@ namespace Strategy.Implementation
         public ExperimentStatus Status { get; private set; } = ExperimentStatus.NotStarted;
         public uint ScenariosCount { get; private set; }
 
-        public Experiment(uint scenariosCount, uint timeStepsCount)
-            : this(scenariosCount, timeStepsCount, 0, 1) { }
+        public Experiment(double startAmount, uint scenariosCount, uint timeStepsCount)
+            : this(startAmount, scenariosCount, timeStepsCount, 0, 1) { }
 
-        public Experiment(uint scenariosCount, uint timeStepsCount, double mean, double std)
+        public Experiment(double startAmount, uint scenariosCount, uint timeStepsCount, double mean, double std)
         {
             var factory = new SimulationFactory(mean, std);
             ScenariosCount = scenariosCount;
-            simulations = new object[scenariosCount].Select(x => factory.CreateSimulation(timeStepsCount));
+            simulations = new object[scenariosCount].Select(x => factory.CreateSimulation(startAmount, timeStepsCount));
         }
 
-        public Experiment(uint scenariosCount, uint timeStepsCount, ISimulationFactory simulationFactory)
+        public Experiment(double startAmount, uint scenariosCount, uint timeStepsCount, ISimulationFactory simulationFactory)
         {
             ScenariosCount = scenariosCount;
-            simulations = new object[scenariosCount].Select(x => simulationFactory.CreateSimulation(timeStepsCount));
+            simulations = new object[scenariosCount].Select(x => simulationFactory.CreateSimulation(startAmount, timeStepsCount));
         }
 
         public async Task RunAsync()

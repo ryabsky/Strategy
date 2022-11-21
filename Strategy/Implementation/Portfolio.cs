@@ -13,7 +13,7 @@ namespace Strategy.Implementation
         public Portfolio(IEnumerable<Asset> assets, uint scenariosCount, uint timeStepsCount)
         {
             experiments = assets.Select(asset => new AssetExperiment(
-                asset, new Experiment(scenariosCount, timeStepsCount, asset.Mean, asset.Std))).ToList();
+                asset, new Experiment(asset.StartAmount, scenariosCount, timeStepsCount, asset.Mean, asset.Std))).ToList();
         }
 
         public async Task Simulate()
