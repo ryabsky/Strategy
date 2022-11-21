@@ -1,6 +1,6 @@
 ﻿namespace StrategyService.Models
 {
-	public class EstimationModel
+    public class EstimationModel
     {
         public string Name { get; set; } = string.Empty;
         public double StartAmount { get; set; }
@@ -8,4 +8,3 @@
         public double? Percentile5 { get; set; } = null;
     }
 }
-

@@ -1,7 +1,7 @@
 ﻿namespace Strategy.Interfaces
 {
-	public interface ISimulationFactory
+    public interface ISimulationFactory
     {
-		ISimulation CreateSimulation(uint timeStepsCount);
-	}
+        ISimulation CreateSimulation(uint timeStepsCount);
+    }
 }

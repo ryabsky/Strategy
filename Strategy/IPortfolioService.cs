@@ -9,4 +9,3 @@ namespace Strategy
         IEnumerable<AssetEstimation>? GetResult(ulong portfolioId);
     }
 }
-

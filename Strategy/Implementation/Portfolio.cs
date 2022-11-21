@@ -6,12 +6,12 @@ using Strategy.Exceptions;
 namespace Strategy.Implementation
 {
     public class Portfolio : IPortfolio
-	{
+    {
         private readonly IEnumerable<AssetExperiment> experiments;
         public ExperimentStatus Status { get; private set; } = ExperimentStatus.NotStarted;
 
         public Portfolio(IEnumerable<Asset> assets, uint scenariosCount, uint timeStepsCount)
-		{
+        {
             experiments = assets.Select(asset => new AssetExperiment(
                 asset, new Experiment(scenariosCount, timeStepsCount, asset.Mean, asset.Std))).ToList();
         }

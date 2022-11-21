@@ -3,7 +3,7 @@ using Strategy.Interfaces;
 
 namespace Strategy.Implementation
 {
-	public class StrategySimulation : ISimulation
+    public class StrategySimulation : ISimulation
     {
         private readonly uint timeStepsCount;
         private readonly IContinuousDistribution distribution;
@@ -26,5 +26,5 @@ namespace Strategy.Implementation
 
             return Math.Exp(pow) - 1;
         }
-	}
+    }
 }

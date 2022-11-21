@@ -51,5 +51,5 @@ namespace Strategy.Implementation
 
             return simulationTasks.Select(x => x.Result).ToList();
         }
-	}
+    }
 }

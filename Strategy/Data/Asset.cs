@@ -1,9 +1,9 @@
 ﻿namespace Strategy.Data
 {
-	public class Asset
-	{
-		public Asset(string name, double startAmount, double mean, double std)
-		{
+    public class Asset
+    {
+        public Asset(string name, double startAmount, double mean, double std)
+        {
             Name = name;
             StartAmount = startAmount;
             Mean = mean;

@@ -1,8 +1,7 @@
 ﻿namespace Strategy.Interfaces
 {
-	public interface ISimulation
-	{
+    public interface ISimulation
+    {
         double GetOverallReturn();
     }
 }
-
